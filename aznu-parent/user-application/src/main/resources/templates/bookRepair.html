@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Book repair</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <!--    bootstrap   -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="container">
+<h1 class="row px-2">Book repair</h1>
+<div class="row">
+    <form action="#" th:action="@{/bookRepair}" th:object="${repairRequest}" method="post"
+          class="">
+        <div data-mdb-input-init class="form-outline mb-4">
+            <label for="visit-date" class="form-label">Book repair in days from now:</label>
+            <input type="number" min="0" th:field="*{inDays}" id="visit-date" class="form-control">
+        </div>
+
+        <div data-mdb-input-init class="form-outline mb-4">
+            <label for="brand-select" class="form-label">Choose car brand</label>
+            <select id="brand-select" th:field="*{brand}" class="form-select">
+                <option th:each="brand : ${T(org.aznu.common.models.gateway.api.Brand).values()}"
+                        th:value="${brand}"
+                        th:text="${brand}"
+                ></option>
+            </select>
+        </div>
+
+        <div data-mdb-input-init class="form-outline mb-4">
+            <label for="part-select" class="form-label">Choose car part</label>
+            <select id="part-select" th:field="*{part}" class="form-select">
+                <option th:each="part : ${T(org.aznu.common.models.gateway.api.Part).values()}"
+                        th:value="${part}"
+                        th:text="${part}"
+                ></option>
+            </select>
+        </div>
+
+        <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+</div>
+
+<div th:if="${repairRequest.visitId != null}" class="mt-5">
+    <div class="row">
+        <p>Here is your request identifier: <span class=”user-select-all” th:text="${repairRequest.visitId}"/>. </p>
+    </div>
+    <div class="row">
+        <p>Use it to check your request status</p>
+    </div>
+</div>
+<a class="btn btn-success my-1" role="button" href="http://localhost:8080/checkBooking">Check your request status here</a>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

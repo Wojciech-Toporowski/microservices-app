@@ -1,0 +1,108 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://partservicesoap.aznu.com/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  name="PartWebServiceService" targetNamespace="http://partservicesoap.aznu.com/">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://partservicesoap.aznu.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://partservicesoap.aznu.com/" version="1.0">
+            <xs:element name="bookPart" type="tns:bookPart"/>
+            <xs:element name="bookPartResponse" type="tns:bookPartResponse"/>
+            <xs:element name="cancelPartBooking" type="tns:cancelPartBooking"/>
+            <xs:element name="cancelPartBookingResponse" type="tns:cancelPartBookingResponse"/>
+            <xs:complexType name="bookPart">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:repairPartRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="repairPartRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="brand" type="xs:string"/>
+                    <xs:element minOccurs="0" name="part" type="xs:string"/>
+                    <xs:element minOccurs="0" name="visitId" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="bookPartResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:repairPartResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="repairPartResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="active" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="comment" type="xs:string"/>
+                    <xs:element minOccurs="0" name="visitId" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="cancelPartBooking">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="cancelPartBookingResponse">
+                <xs:sequence/>
+            </xs:complexType>
+            <xs:element name="SoapError" type="tns:SoapError"/>
+            <xs:complexType name="SoapError">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="time" type="xs:string"/>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                    <xs:element minOccurs="0" name="visitId" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="bookPart">
+        <wsdl:part element="tns:bookPart" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="bookPartResponse">
+        <wsdl:part element="tns:bookPartResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="SoapError">
+        <wsdl:part element="tns:SoapError" name="SoapError"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="cancelPartBookingResponse">
+        <wsdl:part element="tns:cancelPartBookingResponse" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="cancelPartBooking">
+        <wsdl:part element="tns:cancelPartBooking" name="parameters"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="PartWebService">
+        <wsdl:operation name="bookPart">
+            <wsdl:input message="tns:bookPart" name="bookPart"> </wsdl:input>
+            <wsdl:output message="tns:bookPartResponse" name="bookPartResponse"> </wsdl:output>
+            <wsdl:fault message="tns:SoapError" name="SoapError"> </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelPartBooking">
+            <wsdl:input message="tns:cancelPartBooking" name="cancelPartBooking"> </wsdl:input>
+            <wsdl:output message="tns:cancelPartBookingResponse" name="cancelPartBookingResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PartWebServiceServiceSoapBinding" type="tns:PartWebService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="bookPart">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="bookPart">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="bookPartResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="SoapError">
+                <soap:fault name="SoapError" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="cancelPartBooking">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="cancelPartBooking">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="cancelPartBookingResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PartWebServiceService">
+        <wsdl:port binding="tns:PartWebServiceServiceSoapBinding" name="PartWebServicePort">
+            <soap:address location="http://part-service-soap:8084/service/part"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

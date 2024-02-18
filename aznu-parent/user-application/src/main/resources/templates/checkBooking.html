@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Booking check</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/styles.css">
+
+    <!--    bootstrap   -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="container">
+<h1 class="row">Check your visit booking</h1>
+<div class="row">
+    <form action="#" th:action="@{/checkBooking}" method="post" th:object="${visitId}">
+        <div data-mdb-input-init class="form-outline row">
+            <label for="visitId-input" class="form-label px-0">Provide identifier of your request</label>
+            <input type="text" id="visitId-input" th:field="*{visitId}" class="form-control"/>
+        </div>
+        <div class="row mt-1">
+            <button type="submit" class="btn btn-primary col-auto">Submit</button>
+        </div>
+    </form>
+</div>
+
+
+<div th:if="${repairStatus != null}" th:object="${repairStatus}" class="mt-5 row">
+    <h3 class="row d-inline-block">Status info for: <span th:text="${visitId.visitId}"/></h3>
+    <h3 class="row d-inline-block">General status: <span th:text="${repairStatus.getGeneralStatus()}"/></h3>
+    <p class="row d-inline-block">Date status: <span th:text="${repairStatus.getDateStatus()}"/> - <span
+            th:text="${repairStatus.getDateComment()}"/></p>
+    <p class="row d-inline-block">Part status: <span th:text="${repairStatus.getPartStatus()}"/> - <span
+            th:text="${repairStatus.getPartComment()}"/></p>
+</div>
+
+<div class="row">
+    <a class="btn btn-secondary col-auto my-1" role="button" href="http://localhost:8080/bookRepair">Book new repair</a>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

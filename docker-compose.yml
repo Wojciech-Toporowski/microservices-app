@@ -1,0 +1,99 @@
+version: '2'
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    networks:
+      - repair-network
+
+
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      AUTO_CREATE_TOPICS: true
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: EXTERNAL_SAME_HOST://:9093,INTERNAL://:9092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+    volumes:
+      - ./kafka_volumes:/var/run/docker.sock
+    networks:
+      - repair-network
+
+
+  gateway:
+    container_name: gateway
+    image: gateway:1.0
+    ports:
+      - "8081:8081"
+    depends_on:
+      - kafka
+    networks:
+      - repair-network
+
+
+  user-application:
+    container_name: user-application
+    image: user-application:1.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      - gateway
+    networks:
+      - repair-network
+
+
+  date-service-rest:
+    container_name: date-service-rest
+    image: date-service-rest:1.0
+    ports:
+      - "8083:8083"
+    networks:
+      - repair-network
+
+
+  part-service-soap:
+    container_name: part-service-soap
+    image: part-service-soap:1.0
+    ports:
+      - "8084:8084"
+    networks:
+      - repair-network
+
+  kafka-rest-connector:
+    container_name: kafka-rest-connector
+    image: kafka-rest-connector:1.0
+    ports:
+      - "8082:8082"
+    depends_on:
+      - kafka
+      - date-service-rest
+    networks:
+      - repair-network
+
+  kafka-soap-connector:
+    container_name: kafka-soap-connector
+    image: kafka-soap-connector:1.0
+    ports:
+      - "8085:8085"
+    volumes:
+      - ./kafka-soap-connector/src/main/resources:/app/resources
+    depends_on:
+      - kafka
+      - part-service-soap
+    networks:
+      - repair-network
+
+networks:
+  repair-network:
+    driver: bridge
