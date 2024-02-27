@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -21,13 +22,14 @@ import java.util.UUID;
 @Controller
 @Slf4j
 @RequiredArgsConstructor
+@RequestMapping("/repair")
 public class BookingController {
 
     private final RestTemplate restTemplate;
     @Value("${gateway.address}")
     private String gatewayAddress;
 
-    @GetMapping("/bookRepair")
+    @GetMapping()
     public String bookRepair(Model model) {
         if (model.getAttribute("repairRequest") == null) {
             model.addAttribute("repairRequest", new RepairRequest());
@@ -35,12 +37,12 @@ public class BookingController {
         return "bookRepair";
     }
 
-    @PostMapping("/bookRepair")
+    @PostMapping()
     public String bookRepair(Model model, @ModelAttribute("repairRequest") RepairRequest request) {
         log.info(request.toString());
         try {
             ResponseEntity<RepairStatus> re = restTemplate.postForEntity(
-                    gatewayAddress + "/bookRepair",
+                    gatewayAddress + "/repair",
                     request,
                     RepairStatus.class
             );
@@ -53,7 +55,7 @@ public class BookingController {
         }
     }
 
-    @GetMapping("/checkBooking")
+    @GetMapping("/status")
     public String checkBooking(Model model) {
         if (model.getAttribute("visitId") == null) {
             model.addAttribute("visitId", new CheckBookingRequest());
@@ -61,14 +63,14 @@ public class BookingController {
         return "checkBooking";
     }
 
-    @PostMapping("/checkBooking")
+    @PostMapping("/status")
     public String checkBooking(@ModelAttribute("visitId") CheckBookingRequest request, Model model) {
         UUID visitId = request.getVisitId();
         log.info("Visit id: {}", visitId);
         try {
             if (visitId != null) {
                 ResponseEntity<RepairStatus> re = restTemplate.getForEntity(
-                        String.format("%s/repair/status/%s", gatewayAddress, visitId),
+                        String.format("%s/repair/%s", gatewayAddress, visitId),
                         RepairStatus.class
                 );
                 log.info("Gateway called, returned status: {} for {}", re.getBody().getGeneralStatus(), re.getBody().getVisitId());

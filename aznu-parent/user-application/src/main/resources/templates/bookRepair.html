@@ -13,7 +13,7 @@
 <body class="container">
 <h1 class="row px-2">Book repair</h1>
 <div class="row">
-    <form action="#" th:action="@{/bookRepair}" th:object="${repairRequest}" method="post"
+    <form action="#" th:action="@{/repair}" th:object="${repairRequest}" method="post"
           class="">
         <div data-mdb-input-init class="form-outline mb-4">
             <label for="visit-date" class="form-label">Book repair in days from now:</label>
@@ -52,7 +52,8 @@
         <p>Use it to check your request status</p>
     </div>
 </div>
-<a class="btn btn-success my-1" role="button" href="http://localhost:8080/checkBooking">Check your request status here</a>
+<a class="btn btn-success my-1" role="button" href="http://localhost:8080/user-application/repair/status">Check your
+    request status here</a>
 
 
 <!-- Bootstrap JS -->

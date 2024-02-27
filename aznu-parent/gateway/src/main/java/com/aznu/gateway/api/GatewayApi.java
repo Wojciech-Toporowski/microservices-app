@@ -17,6 +17,7 @@ import java.util.UUID;
 
 
 @RestController
+@RequestMapping("/repair")
 @Slf4j
 public class GatewayApi {
     private final GatewayService service;
@@ -62,7 +63,7 @@ public class GatewayApi {
                     )
             }
     )
-    @PostMapping("/bookRepair")
+    @PostMapping()
     public RepairStatus bookRepair(@RequestBody RepairRequest request) {
         log.info("Repair request coming from user: {}", request);
         RepairStatus res = service.bookRepair(request);
@@ -104,7 +105,7 @@ public class GatewayApi {
                     )
             }
     )
-    @GetMapping("/repair/status/{visitId}")
+    @GetMapping("/{visitId}")
     public RepairStatus repairStatus(
             @Parameter(
                     name =  "visitId",

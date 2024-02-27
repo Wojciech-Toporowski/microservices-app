@@ -83,9 +83,9 @@ The project, in a simplified manner, simulates a car repair booking system. It c
 
 Part service SOAP WSDL: [http://localhost:8084/service/part?wsdl](http://localhost:8084/service/part?wsdl)
 
-User interface for booking: [http://localhost:8080/bookRepair](http://localhost:8080/bookRepair)
+User interface for booking: [http://localhost:8080/user-application/repair](http://localhost:8080/user-application/repair)
 
-User interface for checking status: [http://localhost:8080/checkBooking](http://localhost:8080/checkBooking)
+User interface for checking status: [http://localhost:8080/user-application/repair/status](http://localhost:8080/user-application/repair/status)
 
 Gateway REST API swagger documentation: [http://localhost:8081/swagger-ui/index.html](http://localhost:8081/swagger-ui/index.html)
 

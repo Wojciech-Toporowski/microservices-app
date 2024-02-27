@@ -13,7 +13,7 @@
 <body class="container">
 <h1 class="row">Check your visit booking</h1>
 <div class="row">
-    <form action="#" th:action="@{/checkBooking}" method="post" th:object="${visitId}">
+    <form action="#" th:action="@{/repair/status}" method="post" th:object="${visitId}">
         <div data-mdb-input-init class="form-outline row">
             <label for="visitId-input" class="form-label px-0">Provide identifier of your request</label>
             <input type="text" id="visitId-input" th:field="*{visitId}" class="form-control"/>
@@ -35,7 +35,8 @@
 </div>
 
 <div class="row">
-    <a class="btn btn-secondary col-auto my-1" role="button" href="http://localhost:8080/bookRepair">Book new repair</a>
+    <a class="btn btn-secondary col-auto my-1" role="button" href="http://localhost:8080/user-application/repair">Book
+        new repair</a>
 </div>
 
 <!-- Bootstrap JS -->
