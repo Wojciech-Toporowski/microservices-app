@@ -2,7 +2,9 @@
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
                   name="PartWebServiceService" targetNamespace="http://partservicesoap.aznu.com/">
     <wsdl:types>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://partservicesoap.aznu.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://partservicesoap.aznu.com/" version="1.0">
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://partservicesoap.aznu.com/"
+                   attributeFormDefault="unqualified" elementFormDefault="unqualified"
+                   targetNamespace="http://partservicesoap.aznu.com/" version="1.0">
             <xs:element name="bookPart" type="tns:bookPart"/>
             <xs:element name="bookPartResponse" type="tns:bookPartResponse"/>
             <xs:element name="cancelPartBooking" type="tns:cancelPartBooking"/>
@@ -51,29 +53,29 @@
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="bookPart">
-        <wsdl:part element="tns:bookPart" name="parameters"> </wsdl:part>
+        <wsdl:part element="tns:bookPart" name="parameters"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="bookPartResponse">
-        <wsdl:part element="tns:bookPartResponse" name="parameters"> </wsdl:part>
+        <wsdl:part element="tns:bookPartResponse" name="parameters"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="SoapError">
-        <wsdl:part element="tns:SoapError" name="SoapError"> </wsdl:part>
+        <wsdl:part element="tns:SoapError" name="SoapError"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="cancelPartBookingResponse">
-        <wsdl:part element="tns:cancelPartBookingResponse" name="parameters"> </wsdl:part>
+        <wsdl:part element="tns:cancelPartBookingResponse" name="parameters"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="cancelPartBooking">
-        <wsdl:part element="tns:cancelPartBooking" name="parameters"> </wsdl:part>
+        <wsdl:part element="tns:cancelPartBooking" name="parameters"></wsdl:part>
     </wsdl:message>
     <wsdl:portType name="PartWebService">
         <wsdl:operation name="bookPart">
-            <wsdl:input message="tns:bookPart" name="bookPart"> </wsdl:input>
-            <wsdl:output message="tns:bookPartResponse" name="bookPartResponse"> </wsdl:output>
-            <wsdl:fault message="tns:SoapError" name="SoapError"> </wsdl:fault>
+            <wsdl:input message="tns:bookPart" name="bookPart"></wsdl:input>
+            <wsdl:output message="tns:bookPartResponse" name="bookPartResponse"></wsdl:output>
+            <wsdl:fault message="tns:SoapError" name="SoapError"></wsdl:fault>
         </wsdl:operation>
         <wsdl:operation name="cancelPartBooking">
-            <wsdl:input message="tns:cancelPartBooking" name="cancelPartBooking"> </wsdl:input>
-            <wsdl:output message="tns:cancelPartBookingResponse" name="cancelPartBookingResponse"> </wsdl:output>
+            <wsdl:input message="tns:cancelPartBooking" name="cancelPartBooking"></wsdl:input>
+            <wsdl:output message="tns:cancelPartBookingResponse" name="cancelPartBookingResponse"></wsdl:output>
         </wsdl:operation>
     </wsdl:portType>
     <wsdl:binding name="PartWebServiceServiceSoapBinding" type="tns:PartWebService">
@@ -102,7 +104,7 @@
     </wsdl:binding>
     <wsdl:service name="PartWebServiceService">
         <wsdl:port binding="tns:PartWebServiceServiceSoapBinding" name="PartWebServicePort">
-            <soap:address location="http://part-service-soap:8084/soap-service/repair/part"/>
+            <soap:address location="http://localhost:8084/soap-service/repair/part"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

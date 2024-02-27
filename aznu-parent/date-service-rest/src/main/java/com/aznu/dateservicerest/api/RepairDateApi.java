@@ -13,6 +13,7 @@ import java.util.UUID;
 
 @RestController
 @Slf4j
+@RequestMapping("/repair/date")
 public class RepairDateApi {
 
     private RepairDateService service;
@@ -22,7 +23,7 @@ public class RepairDateApi {
         service = s;
     }
 
-    @PostMapping("/repair/date")
+    @PostMapping()
     public RepairDateResponse requestDate(@RequestBody RepairDateRequest request){
         log.info("Incoming request: {}", request);
         RepairDateResponse response = service.bookRepairDate(request);
@@ -30,7 +31,7 @@ public class RepairDateApi {
         return response;
     }
 
-    @DeleteMapping("/repair/date/{id}")
+    @DeleteMapping("/{id}")
     public void deleteDate(@PathVariable UUID id){
         log.info("Incoming request for deleting booking with ID: {}", id);
         if(id == null){

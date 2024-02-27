@@ -122,14 +122,14 @@ kafka-rest-connector                  1.0
 * execute command `docker compose up -d` in project main directory (where docker-compose.yml file is located)
 
 ## Future plans, improvements, development and TODOs:
-- [ ] Zmiany nazw endpointów na rzeczowniki
-- [x] Zmiana nazwy grupy pakietu lib na spójną z resztą projektu
-- [x] Automatyczne budowanie całości z maven
-- [x] Dodanie parent project i hierarchii w pomach
-- [ ] Dodanie 2 różnych baz danych - najlepiej relacyjnej i NoSql
-- [ ] Zmiana usługi daty na datę a nie dni
-- [x] Dodanie bootstrap CSS do frontendu
-- [ ] Dorzucenie orkiestracji przez Docker Swarm (skrypty w razie potrzeby)
-- [ ] Dorzucenie orkiestracji przez kubernetes (skrypty w razie potrzeby)
-- [ ] Healthcheck dla każdego modułu
+- [x] Change lib module group id
+- [x] Add parent project and hierarchy between modules
+- [x] Automatic build of all modules with maven
+- [x] Add bootstrap CSS to frontend
+- [x] Change endpoints names
+- [ ] Add 2 different databases to project (SQL and noSQL)
+- [ ] Change date service from int to date
+- [ ] Orchestration with Docker Swarm
+- [ ] Orchestration with Kubernetes
+- [ ] Healthcheck for all modules
 

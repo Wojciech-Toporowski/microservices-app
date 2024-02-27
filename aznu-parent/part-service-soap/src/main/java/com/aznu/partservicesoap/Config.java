@@ -23,7 +23,7 @@ public class Config {
     @Bean
     public ServletRegistrationBean wsDispatcherServlet() {
         CXFServlet cxfServlet = new CXFServlet();
-        return new ServletRegistrationBean(cxfServlet, "/service/*");
+        return new ServletRegistrationBean(cxfServlet, "/repair/*");
     }
 
     @Bean(name="cxf")
