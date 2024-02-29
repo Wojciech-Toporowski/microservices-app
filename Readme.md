@@ -33,7 +33,7 @@ Projekt w dużym uproszczeniu symuluje system do rezerwowania naprawy samochodu.
 * usługa SOAP rezerwacji części
   * usługa zwraca błąd, gdy wybrana marka to Volkswagen
 * usługa REST rezerwacji terminu
-  * usługa zwraca błąd, gdy `liczba dni do naprawy jest podzielna przez 3`
+  * usługa zwraca błąd, gdy `dzień miesiąca naprawy jest podzielny przez 3` lub `godzina mieści jest pomiędzy 20 a 7`
 * moduł pośredniczący pomiędzy bramą a usługą części, tłumaczący komunikaty brokera na wywołania SOAP i odpowiedzi SOAP na komunikaty brokera
 * moduł pośredniczący pomiędzy bramą a usługą terminu, tłumaczący komunikaty brokera na wywołania REST i odpowiedzi REST na komunikaty brokera
 
@@ -65,7 +65,7 @@ The project, in a simplified manner, simulates a car repair booking system. It c
 * SOAP parts reservation service.
   * The service returns an error when the selected brand is Volkswagen.
 * REST appointment reservation service.
-  * The service returns an error when the number of repair days is divisible by 3.
+  * The service returns an error when: `date of repair is divisible by 3` or `hour is between 8 PM and 7 AM`.
 * Middleware module between the gateway and the parts service, translating broker messages into SOAP calls and SOAP responses into broker messages.
 * Middleware module between the gateway and the appointment service, translating broker messages into REST calls and REST responses into broker messages.
 
@@ -128,7 +128,7 @@ kafka-rest-connector                  1.0
 - [x] Add bootstrap CSS to frontend
 - [x] Change endpoints names
 - [ ] Add 2 different databases to project (SQL and noSQL)
-- [ ] Change date service from int to date
+- [x] Change date service from int to date
 - [ ] Orchestration with Docker Swarm
 - [ ] Orchestration with Kubernetes
 - [ ] Healthcheck for all modules

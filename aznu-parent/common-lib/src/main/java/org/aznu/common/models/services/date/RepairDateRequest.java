@@ -2,6 +2,7 @@ package org.aznu.common.models.services.date;
 
 import lombok.*;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Builder
@@ -11,5 +12,5 @@ import java.util.UUID;
 public class RepairDateRequest {
     @NonNull
     private UUID visitId;
-    private @NonNull int inDays;
+    private @NonNull Date dateTime;
 }

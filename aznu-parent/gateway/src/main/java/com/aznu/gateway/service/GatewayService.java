@@ -68,7 +68,7 @@ public class GatewayService {
                                 om.writeValueAsString(
                                         RepairDateRequest.builder()
                                                 .visitId(request.getVisitId())
-                                                .inDays(request.getInDays())
+                                                .dateTime(request.getDateTime())
                                                 .build()
                                 )
                         )

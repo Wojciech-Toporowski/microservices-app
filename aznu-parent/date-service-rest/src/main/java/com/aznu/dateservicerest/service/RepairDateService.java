@@ -6,6 +6,7 @@ import org.aznu.common.models.services.date.RepairDateResponse;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,11 +46,13 @@ public class RepairDateService {
             visitsMap.computeIfAbsent(request.getVisitId(), r -> {
                 // example error for date where day is divided by 3
                 DateBooking b;
-                if (request.getInDays() % 3 == 0) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(request.getDateTime());
+                if (calendar.get(Calendar.DATE) % 3 == 0 || calendar.get(Calendar.HOUR_OF_DAY) >= 20 || calendar.get(Calendar.HOUR_OF_DAY) <= 7) {
                     b = DateBooking.builder()
                             .visitId(request.getVisitId())
                             .state(State.CANCELLED)
-                            .inDays(request.getInDays())
+                            .dateTime(request.getDateTime())
                             .comment("Selected date is not available")
                             .build();
                     return b;
@@ -59,7 +62,7 @@ public class RepairDateService {
                     b = DateBooking.builder()
                             .visitId(request.getVisitId())
                             .state(State.BOOKED)
-                            .inDays(request.getInDays())
+                            .dateTime(request.getDateTime())
                             .comment("Booking created")
                             .build();
                     return b;

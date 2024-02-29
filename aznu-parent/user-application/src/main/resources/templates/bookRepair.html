@@ -17,7 +17,7 @@
           class="">
         <div data-mdb-input-init class="form-outline mb-4">
             <label for="visit-date" class="form-label">Book repair in days from now:</label>
-            <input type="number" min="0" th:field="*{inDays}" id="visit-date" class="form-control">
+            <input type="datetime-local" min="0" th:field="*{dateTime}" id="visit-date" class="form-control">
         </div>
 
         <div data-mdb-input-init class="form-outline mb-4">
@@ -52,7 +52,7 @@
         <p>Use it to check your request status</p>
     </div>
 </div>
-<a class="btn btn-success my-1" role="button" href="http://localhost:8080/user-application/repair/status">Check your
+<a class="btn btn-success my-1" role="button" th:href="@{/repair/status}">Check your
     request status here</a>
 
 

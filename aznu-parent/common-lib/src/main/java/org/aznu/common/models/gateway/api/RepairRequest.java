@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
@@ -13,7 +15,8 @@ import java.util.UUID;
 @Data
 @Builder(toBuilder = true)
 public class RepairRequest {
-    private int inDays;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    protected Date dateTime;
     private Brand brand;
     private Part part;
     private UUID visitId;

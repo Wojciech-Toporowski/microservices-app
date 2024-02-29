@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -11,7 +12,7 @@ import java.util.UUID;
 public class DateBooking {
     @NonNull
     private final UUID visitId;
-    private int inDays;
+    private Date dateTime;
     private String comment;
     private State state;
 }
